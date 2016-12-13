@@ -12,6 +12,10 @@ Release Date:
 Author:
 Peng Wei          info@sandboxelectronics.com
 
+Data for testing can be found here :
+GarageProto
+https://docs.google.com/spreadsheets/d/192j8yuMogPcjxVxv44RQzKNSMyxzqDqMaO5j2jcY-m0/edit?usp=sharing
+
 Lisence:
 */
 #include <SPI.h>
@@ -46,6 +50,7 @@ void loop() {
     if (millis() - Millis > 10) {
         if (Len) {
             if (parseFloat(Buf, Len, &v)) {
+                MyDAC.reset(); // MSB added on 12/13/2016 Function in lib has a 500ms wait time for CAL
                 MyDAC.writeV(v);
                 getTemp();
                 Serial.print("V1 = ");
